@@ -38,7 +38,7 @@ if (isset($_POST["nom_cat"]))
         <?php echo $error; ?>
     </div>
 
-    <form action="" method="POST">
+    <form action="" method="POST" >
         <table border="1" align="center">
 
             <tr>

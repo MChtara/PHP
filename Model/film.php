@@ -11,4 +11,54 @@ class Film
     private ?DateTime $annee = null;
     private ?int $id_cat = null;
 
+    public function __construct($id_f = null, $t, $r, $d, $s, $img, $a, $id_c)
+    {
+        $this->id_film = $id_f;
+        $this->titre = $t;
+        $this->realisateur = $r;
+        $this->durree = $d;
+        $this->synopsis = $s;
+        $this->image = $img;
+        $this->annee = $a;
+        $this->id_cat = $id_c;
+    }
+
+    public function getId_film()
+    {
+        return $this->id_film;
+    }
+    public function getTitre_film()
+    {
+        return $this->titre;
+    }
+    public function getRealisateur_film()
+    {
+        return $this->realisateur;
+    }
+    public function getAnnee_film()
+    {
+        return $this->annee;
+    }
+    public function getDurree_film()
+    {
+        return $this->durree;
+    }
+    public function getSynopsis_film()
+    {
+        return $this->synopsis;
+    }
+
+    public function getImage_film()
+    {
+        return $this->image;
+    }
+
+
+
+    public function setTitre_film($titre)
+    {
+        $this->titre = $titre;
+        return $this;
+    }
+
 }

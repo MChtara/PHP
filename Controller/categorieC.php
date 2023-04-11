@@ -32,6 +32,14 @@ class categorieC
 
    function addCategorie($categorie)
    {
+    $nom_cat = $categorie->getNomCat();
+
+    if (!preg_match('/^[A-Za-z\s\-]+$/', $nom_cat)) 
+    {
+        echo "Le nom de la catégorie n'est pas valide.";
+        return;
+    }
+
     $sql = "INSERT INTO categorie (nom_cat) VALUES (:nom_cat)";
     $db = config::getConnexion();
     try {

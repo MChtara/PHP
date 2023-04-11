@@ -11,28 +11,42 @@ $filmC = new filmC();
 if (
     isset($_POST["titre"]) &&
     isset($_POST["realisateur"]) &&
-    isset($_POST["durree"]) &&
+    isset($_POST["duree"]) &&
     isset($_POST["synopsis"]) &&
-    isset($_POST["image"]) &&
     isset($_POST["annee"])
 ) {
     if (
         !empty($_POST['titre']) &&
         !empty($_POST["realisateur"]) &&
-        !empty($_POST["durree"]) &&
+        !empty($_POST["duree"]) &&
         !empty($_POST["synopsis"]) &&
-        !empty($_POST["image"]) &&
         !empty($_POST["annee"])
     ) {
         $film = new film(
             null,
             $_POST['titre'],
             $_POST["realisateur"],
-            $_POST["durree"],
+            $_POST["duree"],
             $_POST["synopsis"],
-            $_POST["image"],
             new DateTime($_POST['annee'])
         );
+
+        // Vérification de saisie pour les attributs de film
+        if (!preg_match('/^[A-Za-z\s]+$/', $film->getTitre_film())) {
+            echo "Le titre du film n'est pas valide.";
+            return;
+        }
+        
+        if (!preg_match('/^[A-Za-z\s]+$/', $film->getRealisateur_film())) {
+            echo "Le nom du réalisateur n'est pas valide.";
+            return;
+        }
+        
+        if (!preg_match('/^[0-9]+$/', $film->getDurree_film())) {
+            echo "La durée du film n'est pas valide.";
+            return;
+        }
+
         $filmC->addFilm($film);
         header('Location:list_film.php');
     } else
@@ -50,7 +64,7 @@ if (
 </head>
 
 <body>
-    <a href="ListClients.php">Back to list </a>
+    <a href="list_film.php">Back to list </a>
     <hr>
 
     <div id="error">
@@ -76,11 +90,11 @@ if (
             </tr>
             <tr>
                 <td>
-                    <label for="durree">durree:
+                    <label for="duree">durree:
                     </label>
                 </td>
                 <td>
-                    <input type="int" name="durree" id="durree">
+                    <input type="int" name="duree" id="duree">
                 </td>
             </tr>
             <tr>
@@ -89,13 +103,6 @@ if (
                     </label>
                 </td>
                 <td><input type="text" name="synopsis" id="synopsis" maxlength="20"></td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="image">image:
-                    </label>
-                </td>
-                <td><input type="text" name="image" id="image" maxlength="20"></td>
             </tr>
             <tr>
                 <td>

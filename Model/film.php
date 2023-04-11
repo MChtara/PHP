@@ -5,22 +5,21 @@ class Film
     private ?int $id_film = null;
     private ?string $titre = null;
     private ?string $realisateur = null;
-    private ?int $durree = null;
+    private ?int $duree = null;
     private ?string $synopsis = null;
     private ?string $image = null;
     private ?DateTime $annee = null;
     private ?int $id_cat = null;
 
-    public function __construct($id_f = null, $t, $r, $d, $s, $img, $a, $id_c)
+    public function __construct($id_f = null, $t, $r, $d, $s, $a)
     {
         $this->id_film = $id_f;
         $this->titre = $t;
         $this->realisateur = $r;
-        $this->durree = $d;
+        $this->duree = $d;
         $this->synopsis = $s;
-        $this->image = $img;
         $this->annee = $a;
-        $this->id_cat = $id_c;
+        
     }
 
     public function getId_film()
@@ -41,7 +40,7 @@ class Film
     }
     public function getDurree_film()
     {
-        return $this->durree;
+        return $this->duree;
     }
     public function getSynopsis_film()
     {

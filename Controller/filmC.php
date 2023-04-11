@@ -33,18 +33,17 @@ class filmC
     function addFilm($film)
     {
         $sql = "INSERT INTO film 
-        VALUES (NULL, :titre,:realisateur, :durree,:synopsis, :img, :annee)";
+        VALUES (NULL, :titre,:realisateur, :duree,:synopsis, :annee)";
         $db = config::getConnexion();
         try {
-            print_r($film->getAnnee_film()->format('Y'));
+            print_r($film->getAnnee_film()->format('Y-m-d'));
             $query = $db->prepare($sql);
             $query->execute([
                 'titre' => $film->getTitre_film(),
                 'realisateur' => $film->getRealisateur_film(),
-                'durree' => $film->getDurree_film(),
+                'duree' => $film->getDurree_film(),
                 'synopsis' => $film->getSynopsis_film(),
-                'img' => $film->getImage_film(),
-                'annee' => $film->getAnnee_film()->format('Y/m/d')
+                'annee' => $film->getAnnee_film()->format('Y-m-d')
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
@@ -52,5 +51,46 @@ class filmC
     }
 
 
+    function updateFilm($film, $id)
+    {
+        try {
+            $db = config::getConnexion();
+            $query = $db->prepare(
+                'UPDATE film SET 
+                    titre = :titre, 
+                    realisateur = :realisateur, 
+                    duree = :duree, 
+                    synopsis = :synopsis
+                    annee = :annee
+                WHERE id_film= :id_film'
+            );
+            $query->execute([
+                'id_film' => $id,
+                'titre' => $film->getTitre_film(),
+                'realisateur' => $film->getRealisateur_film(),
+                'duree' => $film->getDurree_film(),
+                'synopsis' => $film->getSynopsis_film(),
+                'annee' => $film->getAnnee_film()->format('Y-m-d')
+            ]);
+            echo $query->rowCount() . " records UPDATED successfully <br>";
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
 
+    function showfilm($id)
+    {
+        $sql = "SELECT * from film where id_film = $id";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->execute();
+
+            $film = $query->fetch();
+            return $film;
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
 }
+

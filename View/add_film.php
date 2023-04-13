@@ -28,7 +28,7 @@ if (
             $_POST["realisateur"],
             $_POST["duree"],
             $_POST["synopsis"],
-            new DateTime($_POST['annee'])
+            $_POST['annee']
         );
 
         // Vérification de saisie pour les attributs de film
@@ -110,7 +110,7 @@ if (
                     </label>
                 </td>
                 <td>
-                    <input type="date" name="annee" id="annee">
+                    <input type="text" name="annee" id="annee">
                 </td>
             </tr>
             <tr align="center">

@@ -23,13 +23,14 @@ if (
         !empty($_POST["synopsis"]) &&
         !empty($_POST["annee"])
     ) {
-        $film = new film($_POST['id_film'], $_POST['titre'], $_POST["realisateur"], $_POST["duree"], $_POST["synopsis"], new DateTime($_POST['annee']));
+        $film = new film($_POST['id_film'], $_POST['titre'], $_POST["realisateur"], $_POST["duree"], $_POST["synopsis"], $_POST['annee']);
         $filmC->updateFilm($film, $_POST['id_film']);
         header('Location:list_film.php');
     } else
         $error = "Missing information";
 }
 ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -53,6 +54,7 @@ if (
     ?>
 
         <form action="" method="POST">
+            
             <table border="1" align="center">
                 <tr>
                     <td>
@@ -68,13 +70,13 @@ if (
                 </tr>
 
                 <tr>
-                <td>
+                 <td>
                     <label for="realisateur">Realisateur:
                     </label>
-                </td>
-                <td><input type="text" name="realisateur" id="realisateur" value="<?php echo $film['realisateur']; ?>" maxlength="20"></td>
-            </tr>
-            <tr>
+                 </td>
+                 <td><input type="text" name="realisateur" id="realisateur" value="<?php echo $film['realisateur']; ?>" maxlength="20"></td>
+                </tr>
+              <tr>
                 <td>
                     <label for="duree">durree:
                     </label>
@@ -85,10 +87,9 @@ if (
             </tr>
             <tr>
                 <td>
-                    <label for="synopsis">synopsis:
-                    </label>
+                    <label for="synopsis">synopsis: </label>
                 </td>
-                <td><input type="text" name="synopsis" value="<?php echo $film['synopsis']; ?>" id="synopsis" maxlength="20"></td>
+                <td><input type="text" name="synopsis" id="synopsis" value="<?php echo $film['synopsis']; ?>" maxlength="20"></td>
             </tr>
             <tr>
                 <td>
@@ -96,7 +97,7 @@ if (
                     </label>
                 </td>
                 <td>
-                    <input type="date" name="annee" value="<?php echo $film['annee']; ?>" id="annee">
+                    <input type="text" name="annee" id="annee" value="<?php echo $film['annee']; ?>" >
                 </td>
             </tr>
                 <tr>

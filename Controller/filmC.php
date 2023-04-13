@@ -36,14 +36,13 @@ class filmC
         VALUES (NULL, :titre,:realisateur, :duree,:synopsis, :annee)";
         $db = config::getConnexion();
         try {
-            print_r($film->getAnnee_film()->format('Y-m-d'));
             $query = $db->prepare($sql);
             $query->execute([
                 'titre' => $film->getTitre_film(),
                 'realisateur' => $film->getRealisateur_film(),
                 'duree' => $film->getDurree_film(),
                 'synopsis' => $film->getSynopsis_film(),
-                'annee' => $film->getAnnee_film()->format('Y-m-d')
+                'annee' => $film->getAnnee_film()
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
@@ -60,7 +59,7 @@ class filmC
                     titre = :titre, 
                     realisateur = :realisateur, 
                     duree = :duree, 
-                    synopsis = :synopsis
+                    synopsis = :synopsis,
                     annee = :annee
                 WHERE id_film= :id_film'
             );
@@ -70,7 +69,7 @@ class filmC
                 'realisateur' => $film->getRealisateur_film(),
                 'duree' => $film->getDurree_film(),
                 'synopsis' => $film->getSynopsis_film(),
-                'annee' => $film->getAnnee_film()->format('Y-m-d')
+                'annee' => $film->getAnnee_film()
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
         } catch (PDOException $e) {

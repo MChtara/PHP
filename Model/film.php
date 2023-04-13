@@ -8,7 +8,7 @@ class Film
     private ?int $duree = null;
     private ?string $synopsis = null;
     private ?string $image = null;
-    private ?DateTime $annee = null;
+    private ?string $annee = null;
     private ?int $id_cat = null;
 
     public function __construct($id_f = null, $t, $r, $d, $s, $a)
